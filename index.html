@@ -120,8 +120,8 @@
           <h4>Example</h4>
           <pre><code class="javascript">minAjax({
     url:"test.php",//request URL
-    type:"GET",//Request type GET/POST
-    //Send Data in form of GET/POST
+    type:"GET",//Request type GET/POST/HEAD
+    //Send Data in form of GET/POST/HEAD
     data:{
       name:"batman",
       profession:"detective",
@@ -137,16 +137,16 @@
           <p>This is example to use minAjax() , these are the frequent arguments which are usually passed for request to take place there are some optional arguments i'll explain them below.</p>
           </div>
 
-<div class="col-md-12"><h1><b>Compulsory Arguments</b></h1></div>
+<div class="col-md-12"><h1><b>Mandatory Arguments</b></h1></div>
                   <div class="col-md-6">
-          <h2><b>url:</b></h2> <span class="label label-primary">Compulsory</span>
+          <h2><b>url:</b></h2> <span class="label label-primary">Mandatory</span>
           <pre><code class="javascript">url:'Path or Link to Server Side.'</code></pre>
           <p></p>
           </div>
 
                             <div class="col-md-6">
-          <h2><b>type:</b></h2> <span class="label label-primary">Compulsory</span>
-          <pre><code class="javascript">type:"GET or POST"</code></pre>
+          <h2><b>type:</b></h2> <span class="label label-primary">Mandatory</span>
+          <pre><code class="javascript">type:"GET, POST or HEAD"</code></pre>
           <p></p>
           </div>
           <div class="col-md-12"><h1><b>Optional Arguments</b></h1></div>
@@ -173,6 +173,15 @@
           }</code></pre>
           <p>Execution of Callback function on valid response is totally optional , function can take <b>Response text</b> and <b> Response Status</b> as arguments to process on client side.</p>
           </div>
+        
+          <div class="col-md-12">
+          <h2><b>failed:</b></h2> <span class="label label-warning">Optional</span>
+          <pre><code class="javascript">failed: function(data){
+          alert(data);
+          //function to be executed on non 200 response with response TEXT as argument.
+          }</code></pre>
+          <p>Execution of Callback function non 200 response is totally optional , function can take <b>Response text</b> and <b> Response Status</b> as arguments to process on client side.</p>
+          </div>
 
           <div class="col-md-6">
           <h2><b>method:</b></h2> <span class="label label-warning">Optional</span>
@@ -180,7 +189,7 @@
           <p>By Default Method will be <b>True</b> i.e <b>Async</b> calls . <b>You Can Leave This</b></p>
           </div>
           <div class="col-md-6">
-          <h2><b>debugLog:</b></h2> <span class="label label-warning">Optional</span>
+          <h2><b>debugLog:</b></h2> <span class="label label-warning">Optional and only used on Debug version</span>
           <pre><code class="javascript">debugLog:'True to enable Debug Console Logs | By Default it is False'</code></pre>
           <p>By Default Method will be <b>False | You Can Leave This</b></p>
           </div>
@@ -208,29 +217,10 @@
   });</code></pre>
     
           </div>
-
-
-        
-        
-        <div class="col-md-12">
-          <h2>
-            To-Do's (Not Yet Implemented)
-         </h2>
-         
-         <p>
-           1.) Implentation of all HTTP Request.
-         </p>
-        
-        </div>
       </div>
-      
       <hr>
-      
       <footer>
-        
       </footer>
     </div>
-    
-  
   </body>
 </html>
