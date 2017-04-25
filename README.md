@@ -1,10 +1,9 @@
 # minAjax.js
-A minimalist Javascript library to perform AJAX POST and GET Request.
-
-
+A minimalist Javascript library to perform AJAX POST, GET and HEAD Request.
+Forked from https://github.com/cbaket/minAjax.js
 
 #Check Pretty Documentation
-http://flouthoc.github.io/minAjax.js/
+http://killercode.github.io/minAjax.js/
 
 #Usage
 Getting Started
@@ -102,7 +101,10 @@ minAjax({
     //CALLBACK FUNCTION with RESPONSE as argument
     success: function(data){
       alert(data);
-    }
+    },
+    failed: function(data){
+      alert("ERROR: " + data);
+      }
 
   });
   
