@@ -1,7 +1,8 @@
 /*|--minAjax.js--|
-  |--(A Minimalistic Pure JavaScript Header for Ajax POST/GET Request )--|
+  |--(A Minimalistic Pure JavaScript Header for Ajax POST/GET/HEAD Request )--|
   |--Author : cbaket ()(http://github.com/cbaket)--|
   |--Contributers : Add Your Name Below--|
+  |--killercode (http://github.com/killercode)
   */
 
 // all possible variants
@@ -18,7 +19,7 @@ var XMLHTTPtypes = [
 function XMLhttp() {
     if(this instanceof XMLhttp) {
         XMLHTTPtypes.forEach(function(t) {
-            try { xmlhttp = t(); } 
+            try { xmlhttp = t(); }
             catch(e) {}
         });
         return xmlhttp;
@@ -56,6 +57,7 @@ function minAjax(config) {
             debugLog: "(OPTIONAL)To display Debug Logs | By default it is false"
             data: "(OPTIONAL) another Nested Object which should contains reqested Properties in form of Object Properties"
             success: "(OPTIONAL) Callback function to process after response | function(data,status)"
+            failed: "(OPTIONAL) Callback function to process after a failed response | function(data,status)"
     */
 
     if(config.url === "") {
@@ -90,12 +92,15 @@ function minAjax(config) {
             }
 
             if (config.debugLog == true)
+            {
                 console.log("SuccessResponse");
-            if (config.debugLog == true)
                 console.log("Response Data:" + xmlhttp.responseText);
-
+            }
         } else {
-
+            if (config.failed)
+            {
+              config.failed(xmlhttp.responseText, xmlhttp.readyState);
+            }
             if (config.debugLog == true)
                 console.log("FailureResponse --> State:" + xmlhttp.readyState + "Status:" + xmlhttp.status);
         }
