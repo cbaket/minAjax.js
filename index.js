@@ -84,12 +84,13 @@ function minAjax(config) {
             if (config.success) {
                 config.success(xmlhttp.responseText, xmlhttp.readyState);
             }
-        } else {
-            if (config.failed)
-            {
-              config.failed(xmlhttp.responseText, xmlhttp.readyState);
+            else {
+              if (config.failed)
+              {
+                config.failed(xmlhttp.responseText, xmlhttp.readyState);
+              }
             }
-        }
+         }
     }
 
     var sendString = [],
