@@ -96,11 +96,13 @@ function minAjax(config) {
                 console.log("SuccessResponse");
                 console.log("Response Data:" + xmlhttp.responseText);
             }
-            else {
-              if (config.failed)
-              {
+        }
+       else if (xmlhttp.readyState == 4 && xmlhttp.status != 200)
+        {
+          if (config.failed)
+             {
                 config.failed(xmlhttp.responseText, xmlhttp.readyState);
-              }
+              
               if (config.debugLog == true)
                   console.log("FailureResponse --> State:" + xmlhttp.readyState + "Status:" + xmlhttp.status);
             }
