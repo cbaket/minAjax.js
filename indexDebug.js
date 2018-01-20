@@ -54,15 +54,18 @@ function minAjax(config) {
             url:"reqesting URL"
             type:"GET or POST"
             method: "(OPTIONAL) True for async and False for Non-async | By default its Async"
+            debugLog: "(OPTIONAL)To display Debug Logs | By default it is false"
             data: "(OPTIONAL) another Nested Object which should contains reqested Properties in form of Object Properties"
             success: "(OPTIONAL) Callback function to process after response | function(data,status)"
             failed: "(OPTIONAL) Callback function to process after a failed response | function(data,status)"
     */
 
     if(config.url === "") {
+        if (config.debugLog === true) { console.log("No Url!"); }
         return;
     }
     if(config.type === "") {
+        if (config.debugLog === true) { console.log("No request type given"); }
         return;
     }
 
@@ -76,22 +79,33 @@ function minAjax(config) {
         config.method = false;
     }
 
+    config.debugLog === true ? true : false;
+
     var xmlhttp = XMLhttp();
 
     xmlhttp.onreadystatechange = function() {
 
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
             if (config.success) {
                 config.success(xmlhttp.responseText, xmlhttp.readyState);
             }
-        }
-        else if (xmlhttp.readyState == 4 && xmlhttp.status != 200)
-        {
-            if (config.failed)
+
+            if (config.debugLog == true)
             {
-              config.failed(xmlhttp.responseText, xmlhttp.readyState);
+                console.log("SuccessResponse");
+                console.log("Response Data:" + xmlhttp.responseText);
             }
-          
+        }
+       else if (xmlhttp.readyState == 4 && xmlhttp.status != 200)
+        {
+          if (config.failed)
+             {
+                config.failed(xmlhttp.responseText, xmlhttp.readyState);
+              
+              if (config.debugLog == true)
+                  console.log("FailureResponse --> State:" + xmlhttp.readyState + "Status:" + xmlhttp.status);
+            }
         }
     }
 
@@ -119,6 +133,7 @@ function minAjax(config) {
 
     if((config.type === "GET") || (config.type === "POST") || (config.type === "HEAD")) {
         req[config.type.toLowerCase()].call(config, xmlhttp, sendString);
+        if(config.debugLog) { req.log.call(config, xmlhttp, sendString); }
     } else {
         console.log('Request type not supported');
     }
